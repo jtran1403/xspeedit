@@ -4,6 +4,12 @@ import java.util.List;
 
 public class Robot
 {
+    private final Packer packer;
+
+    public Robot(final Packer packer) {
+        this.packer = packer;
+    }
+
     public String print(List<String> articles) {
         final StringBuilder stringBuilder = new StringBuilder();
         articles.forEach(article -> {
@@ -17,5 +23,9 @@ public class Robot
 
     private boolean isFirstArticle(StringBuilder stringBuilder) {
         return !stringBuilder.toString().equals("");
+    }
+
+    public void packArticles(final String articles) {
+        packer.pack(articles);
     }
 }
