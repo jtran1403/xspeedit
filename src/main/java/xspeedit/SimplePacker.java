@@ -22,6 +22,10 @@ public final class SimplePacker extends StandardPacker implements Packer {
                 addInNewPackage(newArticle);
             }
         });
+        return getPackagesAsString();
+    }
+
+    private List<String> getPackagesAsString() {
         return packedArticles.stream()
                 .map(StandardPackage::getArticlesAsString)
                 .collect(Collectors.toList());
