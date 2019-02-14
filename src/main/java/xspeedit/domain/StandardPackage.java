@@ -25,6 +25,12 @@ public final class StandardPackage {
         return getArticles();
     }
 
+    public String getArticlesAsString() {
+        final StringBuilder stringBuilder = new StringBuilder();
+        articles.forEach(stringBuilder::append);
+        return stringBuilder.toString();
+    }
+
     private boolean cannotAdd(Integer newArticle) {
         return getCurrentPackageSize() + newArticle > PACKAGE_SIZE_LIMIT;
     }

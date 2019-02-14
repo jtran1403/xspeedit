@@ -38,4 +38,13 @@ public class StandardPackageTest {
                 .isInstanceOf(OversizedPackage.class)
                 .hasMessage("Cannot add article to package");
     }
+
+    @Test
+    public void should_return_articles_in_package_as_string() {
+        final StandardPackage aStandardPackage = new StandardPackage(Arrays.asList(1,6,3));
+
+        final String articles = aStandardPackage.getArticlesAsString();
+
+        assertThat(articles).isEqualTo("163");
+    }
 }
