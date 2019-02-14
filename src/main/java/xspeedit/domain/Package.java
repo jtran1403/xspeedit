@@ -13,4 +13,9 @@ public final class Package {
     public List<Integer> getArticles() {
         return Collections.unmodifiableList(articles);
     }
+
+    public List<Integer> addArticle(Integer newArticle) {
+        this.articles.add(newArticle);
+        return getArticles();
+    }
 }
