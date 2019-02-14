@@ -18,11 +18,18 @@ public final class Package {
     }
 
     public List<Integer> addArticle(Integer newArticle) throws OversizedPackage {
-        final Integer currentPackageSize = this.articles.stream().reduce(0, (article1, article2) -> article1 + article2);
-        if (currentPackageSize + newArticle > PACKAGE_SIZE_LIMIT) {
+        if (cannotAdd(newArticle)) {
             throw new OversizedPackage();
         }
         this.articles.add(newArticle);
         return getArticles();
+    }
+
+    private boolean cannotAdd(Integer newArticle) {
+        return getCurrentPackageSize() + newArticle > PACKAGE_SIZE_LIMIT;
+    }
+
+    private Integer getCurrentPackageSize() {
+        return this.articles.stream().reduce(0, (article1, article2) -> article1 + article2);
     }
 }
