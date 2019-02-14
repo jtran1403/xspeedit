@@ -4,13 +4,19 @@ import xspeedit.domain.StandardPackage;
 import xspeedit.exception.OversizedPackage;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class SimplePacker implements Packer {
+public final class SimplePacker implements Packer {
 
-    private List<StandardPackage> packedArticles = new ArrayList<>();
+    private final List<StandardPackage> packedArticles ;
+
+    SimplePacker() {
+        this.packedArticles = new ArrayList<>();
+        packedArticles.add(new StandardPackage());
+    }
 
     @Override
     public List<String> pack(String articleList) {
@@ -19,7 +25,6 @@ public class SimplePacker implements Packer {
                 .collect(Collectors.toList());
 
         articles.forEach(newArticle -> {
-            initFirstPackage();
             final StandardPackage lastPackage = getLastPackage();
             try {
                 lastPackage.addArticle(newArticle);
@@ -32,15 +37,12 @@ public class SimplePacker implements Packer {
                 .collect(Collectors.toList());
     }
 
-    //TODO should not be necessary
-    private void initFirstPackage() {
-        if(packedArticles.isEmpty()) {
-            packedArticles.add(new StandardPackage());
-        }
-    }
-
     private StandardPackage getLastPackage() {
         final int lastPackageIndex = packedArticles.size() - 1;
         return packedArticles.get(lastPackageIndex);
+    }
+
+    List<StandardPackage> getPackedArticles() {
+        return Collections.unmodifiableList(packedArticles);
     }
 }
