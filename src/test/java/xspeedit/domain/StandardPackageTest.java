@@ -20,20 +20,9 @@ public class StandardPackageTest {
 
     @Test
     public void should_be_initialized_without_articles() {
-        final List<Integer> articles = standardPackage.getArticles();
+        final String articles = standardPackage.getArticlesAsString();
 
         assertThat(articles.isEmpty()).isTrue();
-    }
-
-    @Test
-    public void should_contain_articles() throws OversizedPackage {
-        standardPackage.addArticle(1);
-        standardPackage.addArticle(6);
-        standardPackage.addArticle(3);
-
-        final List<Integer> articles = standardPackage.getArticles();
-
-        assertThat(articles).containsExactly(1,6,3);
     }
 
     @Test
