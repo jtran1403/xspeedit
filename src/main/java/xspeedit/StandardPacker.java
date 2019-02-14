@@ -3,7 +3,6 @@ package xspeedit;
 import xspeedit.domain.StandardPackage;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -18,5 +17,11 @@ class StandardPacker {
 
     List<StandardPackage> getPackedArticles() {
         return packedArticles;
+    }
+
+    List<Integer> getArticlesBySize(String articleList) {
+        return Stream.of(articleList.split(""))
+                .map(Integer::valueOf)
+                .collect(Collectors.toList());
     }
 }

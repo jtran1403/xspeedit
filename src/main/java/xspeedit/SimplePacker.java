@@ -4,7 +4,6 @@ import xspeedit.domain.StandardPackage;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public final class SimplePacker extends StandardPacker implements Packer {
 
@@ -14,9 +13,7 @@ public final class SimplePacker extends StandardPacker implements Packer {
 
     @Override
     public List<String> pack(String articleList) {
-        final List<Integer> articles = Stream.of(articleList.split(""))
-                .map(Integer::valueOf)
-                .collect(Collectors.toList());
+        final List<Integer> articles = getArticlesBySize(articleList);
 
         articles.forEach(newArticle -> {
             final StandardPackage lastPackage = getLastPackage();
