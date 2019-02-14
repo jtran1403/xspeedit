@@ -11,4 +11,10 @@ public class ArticleTest {
         final Article article = new Article(5);
         assertThat(article.getSize()).isEqualTo(5);
     }
+
+    @Test
+    public void should_not_be_packed_by_default() {
+        final Article article = new Article(5);
+        assertThat(article.isPacked()).isFalse();
+    }
 }
