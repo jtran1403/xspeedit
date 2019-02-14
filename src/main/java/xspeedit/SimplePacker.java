@@ -10,20 +10,17 @@ import java.util.stream.Stream;
 
 public class SimplePacker implements Packer {
 
-    private List<StandardPackage> packedArticles;
+    private List<StandardPackage> packedArticles = new ArrayList<>();
 
     @Override
     public List<String> pack(String articleList) {
-        packedArticles = new ArrayList<>();
         final List<Integer> articles = Stream.of(articleList.split(""))
                 .map(Integer::valueOf)
                 .collect(Collectors.toList());
+
         articles.forEach(newArticle -> {
-            if(packedArticles.isEmpty()) {
-                packedArticles.add(new StandardPackage(new ArrayList<>()));
-            }
-            final int lastPackageIndex = packedArticles.size() - 1;
-            final StandardPackage lastPackage = packedArticles.get(lastPackageIndex);
+            initFirstPackage();
+            final StandardPackage lastPackage = getLastPackage();
             try {
                 lastPackage.addArticle(newArticle);
             } catch (OversizedPackage oversizedPackage) {
@@ -33,5 +30,17 @@ public class SimplePacker implements Packer {
         return packedArticles.stream()
                 .map(StandardPackage::getArticlesAsString)
                 .collect(Collectors.toList());
+    }
+
+    private void initFirstPackage() {
+        if(packedArticles.isEmpty()) {
+            //FIXME initial list should be StandardPackage responsibility
+            packedArticles.add(new StandardPackage(new ArrayList<>()));
+        }
+    }
+
+    private StandardPackage getLastPackage() {
+        final int lastPackageIndex = packedArticles.size() - 1;
+        return packedArticles.get(lastPackageIndex);
     }
 }
