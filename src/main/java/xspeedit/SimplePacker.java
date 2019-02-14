@@ -1,7 +1,6 @@
 package xspeedit;
 
 import xspeedit.domain.StandardPackage;
-import xspeedit.exception.OversizedPackage;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,7 +10,7 @@ import java.util.stream.Stream;
 
 public final class SimplePacker implements Packer {
 
-    private final List<StandardPackage> packedArticles ;
+    private final List<StandardPackage> packedArticles;
 
     SimplePacker() {
         this.packedArticles = new ArrayList<>();
@@ -26,9 +25,8 @@ public final class SimplePacker implements Packer {
 
         articles.forEach(newArticle -> {
             final StandardPackage lastPackage = getLastPackage();
-            try {
-                lastPackage.addArticle(newArticle);
-            } catch (OversizedPackage oversizedPackage) {
+            final boolean addedArticle = lastPackage.addNewArticle(newArticle);
+            if (!addedArticle) {
                 addInNewPackage(newArticle);
             }
         });
@@ -38,12 +36,8 @@ public final class SimplePacker implements Packer {
     }
 
     private void addInNewPackage(Integer newArticle) {
-        try {
-            packedArticles.add(new StandardPackage());
-            getLastPackage().addArticle(newArticle);
-        } catch(Exception exception) {
-            //TODO handle case that should never happen
-        }
+        packedArticles.add(new StandardPackage());
+        getLastPackage().addNewArticle(newArticle);
     }
 
     private StandardPackage getLastPackage() {

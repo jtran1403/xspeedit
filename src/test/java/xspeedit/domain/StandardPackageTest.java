@@ -2,12 +2,8 @@ package xspeedit.domain;
 
 import org.junit.Before;
 import org.junit.Test;
-import xspeedit.exception.OversizedPackage;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StandardPackageTest {
 
@@ -26,29 +22,25 @@ public class StandardPackageTest {
     }
 
     @Test
-    public void should_be_able_to_add_articles() throws OversizedPackage {
-        final List<Integer> articles = standardPackage.addArticle(5);
-
-        assertThat(articles).containsExactly(5);
+    public void should_return_true_if_new_article_is_added_successfully() {
+        final boolean added = standardPackage.addNewArticle(5);
+        assertThat(added).isTrue();
     }
 
     @Test
-    public void should_not_be_able_to_add_new_article_when_its_size_makes_package_over_size_limit()
-            throws OversizedPackage {
-        standardPackage.addArticle(1);
-        standardPackage.addArticle(6);
-        standardPackage.addArticle(3);
+    public void should_return_true_if_new_article_cannot_be_added() {
+        standardPackage.addNewArticle(9);
 
-        assertThatThrownBy(() -> standardPackage.addArticle(5))
-                .isInstanceOf(OversizedPackage.class)
-                .hasMessage("Cannot add article to package");
+        final boolean added = standardPackage.addNewArticle(5);
+
+        assertThat(added).isFalse();
     }
 
     @Test
-    public void should_return_articles_in_package_as_string() throws OversizedPackage {
-        standardPackage.addArticle(1);
-        standardPackage.addArticle(6);
-        standardPackage.addArticle(3);
+    public void should_return_articles_in_package_as_string() {
+        standardPackage.addNewArticle(1);
+        standardPackage.addNewArticle(6);
+        standardPackage.addNewArticle(3);
 
         final String articles = standardPackage.getArticlesAsString();
 
