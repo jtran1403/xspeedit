@@ -2,19 +2,14 @@ package xspeedit;
 
 import xspeedit.domain.StandardPackage;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public final class SimplePacker implements Packer {
-
-    private final List<StandardPackage> packedArticles;
+public final class SimplePacker extends StandardPacker implements Packer {
 
     SimplePacker() {
-        this.packedArticles = new ArrayList<>();
-        packedArticles.add(new StandardPackage());
+        super();
     }
 
     @Override
@@ -43,9 +38,5 @@ public final class SimplePacker implements Packer {
     private StandardPackage getLastPackage() {
         final int lastPackageIndex = packedArticles.size() - 1;
         return packedArticles.get(lastPackageIndex);
-    }
-
-    List<StandardPackage> getPackedArticles() {
-        return Collections.unmodifiableList(packedArticles);
     }
 }

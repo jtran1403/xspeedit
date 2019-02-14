@@ -19,12 +19,6 @@ public class SimplePackerTest {
     }
 
     @Test
-    public void should_be_initialized_with_an_empty_standard_package() {
-        final StandardPackage expectedEmptyStandardPackage = new StandardPackage();
-        assertThat(simplePacker.getPackedArticles()).containsExactly(expectedEmptyStandardPackage);
-    }
-
-    @Test
     public void should_add_articles_in_package() {
         final SimplePacker simplePacker = new SimplePacker();
         final ArrayList<String> expectedArticles = new ArrayList<>();
