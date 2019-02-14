@@ -1,9 +1,12 @@
 package xspeedit.domain;
 
+import xspeedit.exception.OversizedPackage;
+
 import java.util.Collections;
 import java.util.List;
 
 public final class Package {
+    private static final Integer PACKAGE_SIZE_LIMIT = 10;
     private final List<Integer> articles;
 
     public Package(List<Integer> articles) {
@@ -14,7 +17,11 @@ public final class Package {
         return Collections.unmodifiableList(articles);
     }
 
-    public List<Integer> addArticle(Integer newArticle) {
+    public List<Integer> addArticle(Integer newArticle) throws OversizedPackage {
+        final Integer currentPackageSize = this.articles.stream().reduce(0, (article1, article2) -> article1 + article2);
+        if (currentPackageSize + newArticle > PACKAGE_SIZE_LIMIT) {
+            throw new OversizedPackage();
+        }
         this.articles.add(newArticle);
         return getArticles();
     }
