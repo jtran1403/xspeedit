@@ -2,7 +2,7 @@ package xspeedit.domain;
 
 public final class Article {
     private final Integer size;
-    private final boolean packed;
+    private boolean packed;
 
     public Article(Integer size) {
         this.size = size;
@@ -15,5 +15,9 @@ public final class Article {
 
     public boolean isPacked() {
         return packed;
+    }
+
+    public void packed() {
+        this.packed = true;
     }
 }
