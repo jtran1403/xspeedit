@@ -29,12 +29,21 @@ public final class SimplePacker implements Packer {
             try {
                 lastPackage.addArticle(newArticle);
             } catch (OversizedPackage oversizedPackage) {
-                //TODO handle exception
+                addInNewPackage(newArticle);
             }
         });
         return packedArticles.stream()
                 .map(StandardPackage::getArticlesAsString)
                 .collect(Collectors.toList());
+    }
+
+    private void addInNewPackage(Integer newArticle) {
+        try {
+            packedArticles.add(new StandardPackage());
+            getLastPackage().addArticle(newArticle);
+        } catch(Exception exception) {
+            //TODO handle case that should never happen
+        }
     }
 
     private StandardPackage getLastPackage() {
