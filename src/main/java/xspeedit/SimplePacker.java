@@ -32,10 +32,10 @@ public class SimplePacker implements Packer {
                 .collect(Collectors.toList());
     }
 
+    //TODO should not be necessary
     private void initFirstPackage() {
         if(packedArticles.isEmpty()) {
-            //FIXME initial list should be StandardPackage responsibility
-            packedArticles.add(new StandardPackage(new ArrayList<>()));
+            packedArticles.add(new StandardPackage());
         }
     }
 

@@ -2,17 +2,15 @@ package xspeedit.domain;
 
 import xspeedit.exception.OversizedPackage;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public final class StandardPackage {
     private static final Integer PACKAGE_SIZE_LIMIT = 10;
-    private final List<Integer> articles;
+    private final List<Integer> articles = new ArrayList<>();
 
-    public StandardPackage(List<Integer> articles) {
-        this.articles = articles;
-    }
-
+    //FIXME unused
     public List<Integer> getArticles() {
         return Collections.unmodifiableList(articles);
     }
