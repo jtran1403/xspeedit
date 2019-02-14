@@ -10,31 +10,31 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class PackageTest {
+public class StandardPackageTest {
 
     @Test
     public void should_contain_articles() {
-        final Package aPackage = new Package(Arrays.asList(1,6,3));
+        final StandardPackage aStandardPackage = new StandardPackage(Arrays.asList(1,6,3));
 
-        final List<Integer> articles = aPackage.getArticles();
+        final List<Integer> articles = aStandardPackage.getArticles();
 
         assertThat(articles).containsExactly(1,6,3);
     }
 
     @Test
     public void should_be_able_to_add_articles() throws OversizedPackage {
-        final Package aPackage = new Package(new ArrayList<>());
+        final StandardPackage aStandardPackage = new StandardPackage(new ArrayList<>());
 
-        final List<Integer> articles = aPackage.addArticle(5);
+        final List<Integer> articles = aStandardPackage.addArticle(5);
 
         assertThat(articles).containsExactly(5);
     }
 
     @Test
     public void should_not_be_able_to_add_new_article_when_its_size_makes_package_over_size_limit() {
-        final Package aPackage = new Package(Arrays.asList(1,6,3));
+        final StandardPackage aStandardPackage = new StandardPackage(Arrays.asList(1,6,3));
 
-        assertThatThrownBy(() -> aPackage.addArticle(5))
+        assertThatThrownBy(() -> aStandardPackage.addArticle(5))
                 .isInstanceOf(OversizedPackage.class)
                 .hasMessage("Cannot add article to package");
     }

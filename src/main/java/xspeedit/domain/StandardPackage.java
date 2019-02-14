@@ -5,11 +5,11 @@ import xspeedit.exception.OversizedPackage;
 import java.util.Collections;
 import java.util.List;
 
-public final class Package {
+public final class StandardPackage {
     private static final Integer PACKAGE_SIZE_LIMIT = 10;
     private final List<Integer> articles;
 
-    public Package(List<Integer> articles) {
+    public StandardPackage(List<Integer> articles) {
         this.articles = articles;
     }
 
