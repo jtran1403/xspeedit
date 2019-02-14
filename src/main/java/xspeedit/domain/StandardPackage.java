@@ -29,6 +29,10 @@ public final class StandardPackage {
         return this.articles.stream().reduce(0, (article1, article2) -> article1 + article2);
     }
 
+    public Integer getSpaceLeft() {
+        return PACKAGE_SIZE_LIMIT - getCurrentPackageSize();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

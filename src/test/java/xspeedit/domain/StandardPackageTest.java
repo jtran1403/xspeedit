@@ -46,4 +46,14 @@ public class StandardPackageTest {
 
         assertThat(articles).isEqualTo("163");
     }
+
+    @Test
+    public void should_return_space_left_in_package() {
+        standardPackage.addNewArticle(1);
+        standardPackage.addNewArticle(6);
+
+        final Integer spaceLeft = standardPackage.getSpaceLeft();
+
+        assertThat(spaceLeft).isEqualTo(3);
+    }
 }
